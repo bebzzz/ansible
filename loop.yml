@@ -1,0 +1,14 @@
+--- # Loop Playbook
+
+- hosts: apacheweb
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no 
+  tasks:
+    - name: Creating users
+      user: name={{ item }} state=absent
+      with_items:
+        - vasya
+        - petya
+        - ivan

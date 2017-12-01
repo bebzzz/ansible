@@ -1,0 +1,10 @@
+--- # Local Action
+- hosts: 127.0.0.1
+  connection: local
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: Install Telnet
+      yum: pkg=telnet state=installed
+

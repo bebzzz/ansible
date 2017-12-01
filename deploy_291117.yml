@@ -1,0 +1,6 @@
+- hosts: apacheweb
+  tasks:
+    - name: Install Lynx package
+      yum: pkg=lynx state=latest update_cache=true
+    - name: Install telnet
+      yum: pkg=telnet state=present update_cache=true

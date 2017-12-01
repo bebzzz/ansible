@@ -1,0 +1,14 @@
+--- # Conditionals Playbook
+
+- hosts: apacheweb, ubuntu
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install HTTPD (RedHat/Centos)
+      command: yum install -y httpd
+      when: ansible_os_family == "RedHat"
+    - name: Install Apache (Debian/Ubuntu)
+      command: apt-get install -y apache2
+      when: ansible_os_family == "Debian"

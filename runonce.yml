@@ -1,0 +1,14 @@
+--- # Run Once Playbook
+- hosts: apacheweb, ubuntu
+  connection: ssh
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: Run uptime
+      raw: /usr/bin/uptime >> /home/ansible/uptime.log
+    - name: Run ListDir
+      raw: ls -la /var >> /home/ansible/dir.list
+      run_once: true
+  
+ 
