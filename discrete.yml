@@ -1,0 +1,10 @@
+--- # Discrete Plays
+- hosts: apacheweb
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - include: plays/telnet.yml
+    - name: Verify telnet is installed
+      raw: yum list installed | grep telnet > /home/ansible/pkgs.log
