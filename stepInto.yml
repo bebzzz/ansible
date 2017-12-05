@@ -1,0 +1,12 @@
+--- # StepINTO playbook   -  ansible-playbook startat.yml --step
+- hosts: apacheweb
+  user: ansible
+  sudo: yes
+  gather_facts: no
+  tasks:
+    - name: task1
+      yum: pkg=htop state=latest
+    - name: task2
+      yum: pkg=telnet state=latest
+    - name: task3
+      yum: pkg=iftop state=latest

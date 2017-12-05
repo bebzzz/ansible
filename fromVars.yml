@@ -1,0 +1,10 @@
+--- # Playbooks - Variables from Command Line - ansible-playbook fromVars.yml --extra-vars '{"hosts":"apacheweb", "user":"ansible", "pkg":"telnet"}'
+- hosts: '{{ hosts }}'
+  user: '{{ user }}'
+  sudo: yes
+  gather_facts: no
+  connection: ssh
+  tasks:
+    - name: Install '{{ pkg }}'
+      yum: pkg={{ pkg }} state=latest
+      
