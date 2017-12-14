@@ -1,0 +1,6 @@
+--- # Copy Module
+- hosts: apacheweb
+  user: ansible
+  tasks:
+    - name: Copy file to remote server
+      action: copy src=/etc/hosts dest=/home/ansible/hosts.file owner=ansible group=ansible mode=0655 backup=yes
