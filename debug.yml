@@ -1,0 +1,12 @@
+--- # Debug Module
+- hosts: apacheweb
+  user: ansible
+  sudo: yes
+  tasks:
+    - name: Install HTTPD
+      yum: pkg=httpd state=latest
+    - debug: msg="Equivalent of sudo yum install httpd"
+    - name: Show UPTIME
+      command: /usr/bin/uptime
+      register: result
+    - debug: var=result

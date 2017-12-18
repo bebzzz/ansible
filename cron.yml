@@ -1,0 +1,6 @@
+--- # Cron Module
+- hosts: apacheweb
+  user: ansible
+  tasks:
+    - name: Add crontask
+      cron: name="Show files" minute='40' hour='16' job='ls -la / > /home/ansible/filelist.log' 

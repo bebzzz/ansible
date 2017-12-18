@@ -1,0 +1,7 @@
+--- # User Module
+- hosts: apacheweb
+  user: ansible
+  sudo: yes
+  tasks: 
+    - name: Create new User
+      user: name=tst comment="user created by ansible" shell=/bin/bash groups=wheel append=yes state=present
