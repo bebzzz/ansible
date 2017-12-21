@@ -1,0 +1,16 @@
+--- # MYSQL_DB MODULE DEMO
+
+- hosts: ubuntu
+  user: ansible
+  sudo: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: Install the Python-pip
+      apt: pkg=python-pip state=latest
+    - name: Install the Python MySQL Support Libraries
+      shell: apt-get install python-dev libmysqlclient-dev -y
+    - name: Install the Python MySQL Support Libraries (2)
+      shell: pip install MySQL-python
+    - name: Create a new user called BOB and give him all access
+      mysql_user: name=bob password=123password priv=*.*:ALL state=present login_user=root login_password=d923tj30g5mg
