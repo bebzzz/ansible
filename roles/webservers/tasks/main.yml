@@ -1,0 +1,9 @@
+- name: Install httpd
+  yum: pkg=httpd state=latest
+  notify: Restart HTTPD
+
+- name: Install Lynx
+  yum: pkg=lynx state=latest
+
+- name: Copy config
+  template: src=test.conf.j2 dest=/home/ansible/test.conf

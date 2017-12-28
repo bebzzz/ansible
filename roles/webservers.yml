@@ -1,0 +1,6 @@
+- hosts: apacheweb,ubuntu
+  user: ansible
+  sudo: yes
+  connection: ssh
+  roles:
+    - { role: webservers, when: "ansible_os_family == 'RedHat'" }

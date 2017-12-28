@@ -1,0 +1,5 @@
+- name: Install htop
+  yum: pkg=htop state=latest
+
+- name: Install Lynx
+  yum: pkg=lynx state=latest
