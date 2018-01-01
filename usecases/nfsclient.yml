@@ -1,0 +1,14 @@
+--- # Master playbook for Role based NFS Client deployment
+
+- hosts: local
+  user: ansible
+  sudo: yes
+  connection: ssh
+  pre_tasks:
+  - name: When did the role start
+    raw: date > /home/ansible/startofrole.log
+  roles:
+    - nfs.client
+  post_tasks:
+  - name: When did the role finish
+    raw: date > /home/ansible/endofrole.log

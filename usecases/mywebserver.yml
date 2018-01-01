@@ -6,29 +6,34 @@
   gather_facts: yes
   vars:
     apache_pkg: httpd
-    distribution: redhat
+    distribution: "{{ ansible_os_family }}" 
     apache_version: 2.4
     apache_dir: /var/www/sample
-    apache_fqdm: abebych4.mylabserver.com
+    apache_fqdn: abebych4.mylabserver.com
   tasks:
     - name: Install the Web Server Package
-      yum: pkg=httpd state=latest
+      yum: pkg={{ apache_pkg }} state=latest
     - name: Create the web server directory
-      file: path=/var/www/sample state=directory mode=0755
+      file: path={{ apache_dir }} state=directory mode=0755
     - name: Copy the apache configuration file to remote host
       copy: src=files/httpd.conf.template dest=/etc/httpd/conf/httpd.conf owner=root group=root mode=644
     - name: Create the VHOST.D directory on the remote host
       file: path=/etc/httpd/vhost.d state=directory mode=755
     - name: Copy and untar the source of the site
-      unarchive: src=files/sitecode.tar.gz dest=/var/www/sample
+      unarchive: src=files/sitecode.tar.gz dest={{ apache_dir }}
     - name: Copy the default vhost configuration file
       copy: src=files/default.conf.template dest=/etc/httpd/conf.d/welcome.conf owner=root group=root mode=644
-    - name: Start the Web server
-      service: name=httpd state=restarted
-    - name: Test the web server
-      shell: curl http://abebych4.mylabserver.com
+      notify:
+        - StartHttpd 
+        - TestHttpd
+        - DisplayResult
+  handlers:
+    - name: StartHttpd
+      service: name={{ apache_pkg }} state=restarted
+    - name: TestHttpd
+      shell: curl http://{{ apache_fqdn }}
       register: result
-    - name: Display result
+    - name: DisplayResult
       debug: var=result
 
   
